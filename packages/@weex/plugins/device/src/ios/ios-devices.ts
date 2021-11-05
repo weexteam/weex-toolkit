@@ -62,9 +62,9 @@ export default class IosDevices extends Devices {
     return devices
   }
 
-  async launchById(id) {
+  async launchById(id: DeviceInfo['id']): Promise<String> {
     try {
-        await process_js_1.exec(`xcrun simctl boot ${id}`, {
+        await exec.exec(`xcrun simctl boot ${id}`, {
             event: this,
         });
     }
