@@ -34,9 +34,9 @@ export default class IosDevices extends Devices {
 
   private getIosDevicesList(): Array<DeviceInfo> {
     // Doctor TODO `xcrun`
-    const text = runAndGetOutput('xcrun instruments -s devices')
+    const text = runAndGetOutput('xcrun xctrace list devices')
     const devices = []
-    const REG_DEVICE = /(.*?) \((.*?)\) \[(.*?)]/
+    const REG_DEVICE = /^([^\(]*) \((.*?)\).*\((.*)\)$/;
 
     const lines = text.split('\n')
     for (const line of lines) {
@@ -64,24 +64,24 @@ export default class IosDevices extends Devices {
 
   async launchById(id: DeviceInfo['id']): Promise<String> {
     try {
-      await exec(`xcrun instruments -w ${id}`, {
-        event: this,
-      })
-    } catch (error) {
-      if (error) {
-        if (
-          error.toString().indexOf('Waiting for device') !== -1 ||
-          error.toString().indexOf('No template (-t) specified') !== -1 ||
-          error.toString().indexOf('Could not create output document') !== -1
-        ) {
-          // instruments always fail with 255 because it expects more arguments,
-          // but we want it to only launch the simulator
-          return
-        }
-        throw error
-      }
+        await exec.exec(`xcrun simctl boot ${id}`, {
+            event: this,
+        });
     }
-  }
+    catch (error) {
+        if (error) {
+            if (error.toString().indexOf('code=405') >= 0 ||
+                error.toString().indexOf('Waiting for device') !== -1 ||
+                error.toString().indexOf('No template (-t) specified') !== -1 ||
+                error.toString().indexOf('Could not create output document') !== -1) {
+                // instruments always fail with 255 because it expects more arguments,
+                // but we want it to only launch the simulator
+                return;
+            }
+            throw error;
+        }
+    }
+}
 
   async run(options: RunDeviceOptions) {
     const deviceInfo = this.getDeviceById(options.id)

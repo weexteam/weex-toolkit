@@ -39,6 +39,8 @@ export default class IosBuilder extends Builder {
       '-scheme': projectInfo.scheme,
       '-configuration': 'Debug',
       '-sdk': 'iphonesimulator',
+      '-arch': 'x86_64', // 与-destination可以任意保留一个
+      '-destination': `"platform=iOS Simulator,id=${options.deviceId}"`,
       '-derivedDataPath': IOS_DERIVE_DATA_PATH,
     }
 
