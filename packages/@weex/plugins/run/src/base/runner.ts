@@ -153,7 +153,7 @@ export default class Runner extends EventEmitter {
       this.watchFileChange()
       this.emit(messageType.state, runnerState.watchFileChangeDone)
 
-      appPath = await this.buildNative(options)
+      appPath = await this.buildNative(Object.assign(this.config, options))
       this.emit(messageType.state, runnerState.buildNativeDone)
 
       await this.installAndLaunchApp(appPath)
