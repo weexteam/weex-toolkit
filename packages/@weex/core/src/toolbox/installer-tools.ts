@@ -1,6 +1,6 @@
 import { fs } from './fs-tools'
 import * as path from 'path'
-import * as importedColors from 'colors/safe'
+import * as importedColors from '@colors/colors/safe'
 import { InstallerOption } from './installer-types'
 import * as childProcess from 'child_process'
 import * as npmii from 'npminstall'

@@ -3,7 +3,7 @@
 
 // first, do a sniff test to ensure our dependencies are met
 const sniff = require('../lib/sniff')
-const colors = require('colors')
+const colors = require('@colors/colors')
 
 // check the node version
 if (!sniff.isNewEnough) {
