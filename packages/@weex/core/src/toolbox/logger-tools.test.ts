@@ -55,7 +55,7 @@ test('progress', () => {
   expect(typeof progress.setTemplate).toBe('function')
 })
 
-test('colors', () => {
+test('@colors/colors', () => {
   expect(typeof logger.colors.highlight).toBe('function')
   expect(typeof logger.colors.info).toBe('function')
   expect(typeof logger.colors.warning).toBe('function')

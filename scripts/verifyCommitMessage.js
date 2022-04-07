@@ -1,5 +1,5 @@
 
-const colors = require('colors')  // eslint-disable-line
+const colors = require('@colors/colors')  // eslint-disable-line
 const msgPath = process.env.GIT_PARAMS
 const msg = require('fs').readFileSync(msgPath, 'utf-8').trim()
 

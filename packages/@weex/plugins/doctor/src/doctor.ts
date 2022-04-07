@@ -18,7 +18,7 @@
 import { AndroidWorkflow, AndroidValidator } from './android/android-workflow'
 import { IOSWorkflow, IOSValidator } from './ios/ios-workflow'
 import { isWindows } from '@weex-cli/utils/lib/platform/platform'
-import * as colors from 'colors'
+import * as colors from '@colors/colors'
 
 export const enum ValidationType {
   missing,
